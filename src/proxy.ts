@@ -56,7 +56,11 @@ export async function getProxyWindowsOverride(): Promise<string> {
     // HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings
     const values = await openKey(Hive.HKCU, "Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings");
     const override = values["ProxyOverride"];
-    return override;
+    if(override && override.value) {
+        return override.value;
+    }else{
+        return null;
+    }
 }
 /**
  * Return proxy settings defined in the environment.
