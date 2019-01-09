@@ -38,9 +38,9 @@ export class ProxySetting {
     public toString() {
         let cred = "";
         if (this.credentials) {
-            cred = `${this.credentials.username}`;
+            cred = encodeURIComponent(this.credentials.username);
             if (this.credentials.password) {
-                cred += `:${this.credentials.password}`;
+                cred += ":" + encodeURIComponent(this.credentials.password);
             }
             cred += "@";
         }
